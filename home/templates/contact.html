@@ -100,7 +100,9 @@
                         </div>
 
                         <!-- Contact -->
-                        <form id="contact-form" class="contact-form" data-toggle="validator">
+                        <form method="post" action="" id="contact-form" class="contact-form"
+                              data-toggle="validator">
+                            {% csrf_token %}
                             <div class="row">
                                 <div class="form-group col-12 col-md-6">
                                     <i class="font-icon icon-user"></i>
@@ -132,13 +134,14 @@
                                     <div id="validator-contact" class="hidden"></div>
                                 </div>
                                 <div class="col-12 col-md-6 order-1 order-md-2 text-left">
-                                    <button type="submit" class="btn disabled" style="margin-bottom: 40px"><i class="font-icon icon-send"></i> ارسال
+                                    <button type="submit" class="btn disabled" style="margin-bottom: 40px"><i
+                                            class="font-icon icon-send"></i> ارسال
                                         پیام
                                     </button>
                                 </div>
                             </div>
+                        </form>
                     </div>
-                    </form>
                 </div>
 
                 <!-- Footer -->

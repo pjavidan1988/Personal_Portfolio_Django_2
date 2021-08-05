@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.mail import EmailMessage
 
 # Create your views here.
 from home.models import Setting, Resume, Skill, Education, otherSkill, Experience
@@ -32,6 +33,18 @@ def resume(request):
     return render(request, 'resume.html', context)
 
 def contact(request):
+    if request.method == 'POST':
+        name = request.POST['nameContact']
+        email = request.POST['emailContact']
+        msg = request.POST['messageContact']
+        body = name + '\n' + email + '\n' + msg
+        form = EmailMessage(
+            'contact form',
+            body,
+            'test',
+            ('p.javidan1988@gmail.com',),
+        )
+        form.send(fail_silently=False)
     setting = Setting.objects.get(pk=1)
     context = {
         'setting': setting,
