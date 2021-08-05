@@ -28,6 +28,8 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
     path('resume/', views.resume, name='resume'),
+    path('contact/', views.contact, name='contact'),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

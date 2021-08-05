@@ -31,5 +31,10 @@ def resume(request):
     }
     return render(request, 'resume.html', context)
 
-
+def contact(request):
+    setting = Setting.objects.get(pk=1)
+    context = {
+        'setting': setting,
+    }
+    return render(request, 'contact.html', context)
 
