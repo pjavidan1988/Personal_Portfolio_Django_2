@@ -19,6 +19,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from home import views
+from home_en import views as Home_enviews
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,6 +33,11 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('blog/', views.blog, name='blog'),
     path('blog/<int:id>', views.blog_detail, name='blog_detail'),
+
+    path('resume_en/', Home_enviews.resume_en, name='resume_en'),
+    path('contact_en/', Home_enviews.contact_en, name='contact_en'),
+    path('blog_en/', Home_enviews.blog_en, name='blog_en'),
+    path('blog_en/<int:id>', Home_enviews.blog_detail_en, name='blog_detail_en'),
 
 ]
 

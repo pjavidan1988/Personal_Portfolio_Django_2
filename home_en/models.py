@@ -2,6 +2,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 from django_jalali.db import models as jmodels
 
+
 # Create your models here.
 
 class Setting_en(models.Model):
@@ -43,5 +44,94 @@ class Setting_en(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Setting_en'
-        verbose_name_plural = 'Setting_en'
+        verbose_name = 'Settings_en'
+        verbose_name_plural = 'Settings_en'
+
+
+class Resume_en(models.Model):
+    STATUS = (
+        ('True', 'True'),
+        ('False', 'False'),
+    )
+    university = models.CharField(max_length=150)
+    date_education = models.CharField(max_length=150)
+    description_education = models.CharField(max_length=255)
+    experiences = models.CharField(max_length=150)
+    date_experiences = models.CharField(max_length=150)
+    description_experiences = models.CharField(max_length=255)
+    language_name = models.CharField(max_length=150)
+    percent = models.CharField(max_length=150)
+    status = models.CharField(max_length=10, choices=STATUS)
+    create_at = jmodels.jDateField(auto_now_add=True)
+    update_at = jmodels.jDateField(auto_now=True)
+
+    def __str__(self):
+        return self.university
+
+    class Meta:
+        verbose_name = 'Resume_en'
+        verbose_name_plural = 'Resume_en'
+
+
+class Skill_en(models.Model):
+    STATUS = (
+        ('True', 'True'),
+        ('False', 'False'),
+    )
+    resume_en = models.ForeignKey(Resume_en, on_delete=models.CASCADE)
+    programming_language = models.CharField(max_length=50, blank=True)
+    percent = models.CharField(max_length=50, blank=True)
+    status = status = models.CharField(max_length=10, choices=STATUS)
+
+    def __str__(self):
+        return self.programming_language
+
+
+class otherSkill_en(models.Model):
+    STATUS = (
+        ('True', 'True'),
+        ('False', 'False'),
+    )
+    resume_en = models.ForeignKey(Resume_en, on_delete=models.CASCADE)
+    skill_name = models.CharField(max_length=50, blank=True)
+    percent = models.CharField(max_length=50, blank=True)
+    status = status = models.CharField(max_length=10, choices=STATUS)
+
+    def __str__(self):
+        return self.skill_name
+
+
+class Education_en(models.Model):
+    resume_en = models.ForeignKey(Resume_en, on_delete=models.CASCADE)
+    university = models.CharField(max_length=50, blank=True)
+    date_education = models.CharField(max_length=150)
+    description_education = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.university
+
+
+class Experience_en(models.Model):
+    resume_en = models.ForeignKey(Resume_en, on_delete=models.CASCADE)
+    experiences = models.CharField(max_length=50, blank=True)
+    date_experiences = models.CharField(max_length=150)
+    description_experiences = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.experiences
+
+
+
+class Blog_en(models.Model):
+    title = models.CharField(max_length=255)
+    img = models.ImageField(blank=True, upload_to='images/blog/%Y/%m/%d/')
+    description = RichTextUploadingField()
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Blog_en'
+        verbose_name_plural = 'Blog_en'

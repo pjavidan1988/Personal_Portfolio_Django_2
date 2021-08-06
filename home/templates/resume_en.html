@@ -1,4 +1,7 @@
+{% extends 'homebase_en.html' %}
+{% block title %}  {{ setting_en.name }}  {{ setting_en.last_name }}  | Resume {% endblock %}
 {% load static %}
+{% block body %}
 <!-- Preloader -->
 <div class="preloader">
     <div class="preloader__wrap">
@@ -22,7 +25,9 @@
                         </g>
                     </svg>
                     <div class="text-center">
-                        <h3 class="title title--h3 sidebar__user-name"><span class="weight--500">{{ setting_en.name }}</span>{{ setting_en.last_name }}
+                        <h3 class="title title--h3 sidebar__user-name"><span
+                                class="weight--500">{{ setting_en.name }}</span>
+                            {{ setting_en.last_name }}
                         </h3>
                         <div class="badge badge--gray">{{ setting_en.description }}</div>
 
@@ -51,15 +56,15 @@
                                 <i class="font-icon icon-location"></i>{{ setting_en.address }}
                             </li>
                             <li class="contacts-block__item" data-toggle="tooltip" data-placement="top" title="email">
-                                <a href="mailto:example@mail.com"><i class="font-icon icon-envelope"></i>{{ setting_en.email }}</a>
+                                <a href="mailto:example@mail.com"><i
+                                        class="font-icon icon-envelope"></i>{{ setting_en.email }}</a>
                             </li>
                             <li class="contacts-block__item" data-toggle="tooltip" data-placement="top" title="phone">
                                 <i class="font-icon icon-phone"></i>{{ setting_en.phone }}
                             </li>
                         </ul>
 
-                        <a class="btn btn--blue-gradient" href="#"><i class="font-icon icon-download"></i>Download
-                            Resume</a>
+                        <a class="btn btn--blue-gradient" href="#"><i class="font-icon icon-download"></i>Download Resume</a>
                     </div>
                 </div>
             </aside>
@@ -81,46 +86,92 @@
                             <li class="nav__item"><a href="/resume_en">My resume</a></li>
                             <li class="nav__item"><a href="/blog_en">blog</a></li>
                             <li class="nav__item"><a href="/contact_en">Contact Me</a></li>
-                            <li class="nav__item"><a href="/home">پارسی</a></li>
+                            <li class="nav__item"><a href="/">پارسی</a></li>
                         </ul>
                     </div>
 
                     <!-- About -->
-                    <div class="pb-0 pb-sm-2">
-                        <h1 class="title title--h1 title__separate">About Me</h1>
-                        {{ setting_en.about | safe }}
+                    <div class="pb-3">
+                        <h1 class="title title--h1 title__separate">Resume</h1>
                     </div>
 
-                    <!-- What -->
-                    <div class="box-inner pb-0">
-                        <h2 class="title title--h3">What do I do</h2>
+                    <!-- Experience -->
+                    <div class="pb-0">
                         <div class="row">
-                            <!-- Case Item -->
                             <div class="col-12 col-lg-6">
-                                <div class="case-item box box__second">
-                                    <img class="case-item__icon" src="{% static 'icons/icon-design.svg' %}" alt=""/>
-                                    <div>
-                                        <h3 class="title title--h5">Web Design</h3>
-                                        <p class="case-item__caption">Website design using Bootstrap</p>
-                                    </div>
+                                <h2 class="title title--h3"><img class="title-icon"
+                                                                 src="{% static 'icons/icon-education.svg' %}" alt=""/>
+                                    Education</h2>
+                                <div class="timeline">
+                                    <!-- Item -->
+                                    {% for rs in education_en %}
+                                    <article class="timeline__item">
+                                        <h5 class="title title--h5 timeline__title">{{ rs.university }}</h5>
+                                        <span class="timeline__period">{{ rs.date_education }}</span>
+                                        <p class="timeline__description">{{ rs.description_education }}</p>
+                                    </article>
+                                    {% endfor %}
                                 </div>
                             </div>
 
-                            <!-- Case Item -->
                             <div class="col-12 col-lg-6">
-                                <div class="case-item box box__second">
-                                    <img class="case-item__icon" src="{% static 'icons/icon-dev.svg' %}" alt=""/>
-                                    <div>
-                                        <h3 class="title title--h5">Web Developer</h3>
-                                        <p class="case-item__caption">Professional website development using Django and laravel frameworks</p>
+                                <h2 class="title title--h3"><img class="title-icon"
+                                                                 src="{% static 'icons/icon-experience.svg' %}" alt=""/>
+                                    Experiences</h2>
+                                <div class="timeline">
+                                    {% for rs in experience_en %}
+                                    <!-- Item -->
+                                    <article class="timeline__item">
+                                        <h5 class="title title--h5 timeline__title">{{ rs.experiences }}</h5>
+                                        <span class="timeline__period">{{ rs.date_experiences }}</span>
+                                        <p class="timeline__description">{{ rs.description_experiences }}</p>
+                                    </article>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="box-inner box-inner--rounded">
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <h2 class="title title--h3">Coding skills</h2>
+                                <div class="box box__second">
+                                    <!-- Progress -->
+                                    {% for rs in skills_en %}
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ rs.percent }}"
+                                             aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-text"><span>{{ rs.programming_language }}</span><span>{{ rs.percent }}%</span></div>
+                                        </div>
+                                        <div class="progress-text"><span>{{ rs.programming_language }}</span></div>
                                     </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 mt-4 mt-lg-0">
+                                <h2 class="title title--h3">Other skills</h2>
+                                <div class="box box__second">
+                                    {% for rs in otherskill_en %}
+                                    <!-- Progress -->
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ rs.percent }}"
+                                             aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-text"><span>{{ rs.skill_name }}</span><span>{{ rs.percent }}%</span></div>
+                                        </div>
+                                        <div class="progress-text"><span>{{ rs.skill_name }}</span></div>
+                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- Footer -->
-                <footer class="footer">© 2019 vCard</footer>
+                <footer class="footer">{{ setting_en.footer_text }}</footer>
             </div>
         </div>
     </div>
@@ -142,3 +193,8 @@
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'js/plugins.js' %}"></script>
 <script src="{% static 'js/common.js' %}"></script>
+
+</body>
+</html>
+
+{% endblock body %}
