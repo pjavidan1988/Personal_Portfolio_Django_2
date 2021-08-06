@@ -1,4 +1,5 @@
 {% extends 'homebase.html' %}
+{% block title %}  {{ setting.name }}  {{ setting.last_name }}  | تماس با من {% endblock %}
 {% load static %}
 {% block body %}
     <!-- Preloader -->
@@ -100,14 +101,13 @@
                         </div>
 
                         <!-- Contact -->
-                        <form method="post" action="" id="contact-form" class="contact-form"
-                              data-toggle="validator">
+                        <form method="post" action="" class="contact-form">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="form-group col-12 col-md-6">
                                     <i class="font-icon icon-user"></i>
                                     <input type="text" class="input input__icon form-control" id="nameContact"
-                                           name="nameContact" placeholder="نام و نام خانوادگی" required="required"
+                                           name="name" placeholder="نام و نام خانوادگی" required="required"
                                            autocomplete="on"
                                            oninvalid="setCustomValidity('لطفا نام و نام خانوادگی خود را وارد کنید.')"
                                            onkeyup="setCustomValidity('')">
@@ -116,13 +116,13 @@
                                 <div class="form-group col-12 col-md-6">
                                     <i class="font-icon icon-envelope"></i>
                                     <input type="email" class="input input__icon form-control" id="emailContact"
-                                           name="emailContact" placeholder="آدرس ایمیل" required="required"
+                                           name="email" placeholder="آدرس ایمیل" required="required"
                                            autocomplete="on" oninvalid="setCustomValidity('ایمیل نادرست است.')"
                                            onkeyup="setCustomValidity('')">
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group col-12 col-md-12">
-                                <textarea class="textarea form-control" id="messageContact" name="messageContact"
+                                <textarea class="textarea form-control" id="messageContact" name="message"
                                           placeholder="پیام ..." rows="4" required="required"
                                           oninvalid="setCustomValidity('لطفا پیام خود را وارد کنید.')"
                                           onkeyup="setCustomValidity('')"></textarea>
@@ -134,9 +134,7 @@
                                     <div id="validator-contact" class="hidden"></div>
                                 </div>
                                 <div class="col-12 col-md-6 order-1 order-md-2 text-left">
-                                    <button type="submit" class="btn disabled" style="margin-bottom: 40px"><i
-                                            class="font-icon icon-send"></i> ارسال
-                                        پیام
+                                    <button type="submit" class="btn" style="margin-bottom: 40px"><i class="font-icon icon-send"></i> ارسال پیام
                                     </button>
                                 </div>
                             </div>

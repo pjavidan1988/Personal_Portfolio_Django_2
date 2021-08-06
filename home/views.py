@@ -34,15 +34,16 @@ def resume(request):
 
 def contact(request):
     if request.method == 'POST':
-        name = request.POST['nameContact']
-        email = request.POST['emailContact']
-        msg = request.POST['messageContact']
-        body = name + '\n' + email + '\n' + msg
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        body = name + '\n'+ '\n'+ '\n' + message + '\n'+ '\n'+ '\n' + 'From: ' + email
+
         form = EmailMessage(
-            'contact form',
+            'پیام از طرف سایت',
             body,
-            'test',
-            ('p.javidan1988@gmail.com',),
+            'message',
+            ('p.javidan1988@gmail.com',)
         )
         form.send(fail_silently=False)
     setting = Setting.objects.get(pk=1)

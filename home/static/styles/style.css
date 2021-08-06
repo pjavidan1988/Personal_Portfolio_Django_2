@@ -318,7 +318,7 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
-  -webkit-text-fill-color: #fff !important;
+  -webkit-text-fill-color: #676464  !important;
 }
 
 input:not(input:-webkit-autofill)::-webkit-contacts-auto-fill-button {

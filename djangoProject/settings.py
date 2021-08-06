@@ -159,4 +159,5 @@ EMAIL_HOST_USER = 'p.javidan1988@gmail.com'
 EMAIL_HOST_PASSWORD = 'htxwvgsxntcuiwnh'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
