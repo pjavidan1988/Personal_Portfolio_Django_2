@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.mail import EmailMessage
 
 # Create your views here.
-from home.models import Setting, Resume, Skill, Education, otherSkill, Experience
+from home.models import Setting, Resume, Skill, Education, otherSkill, Experience, Blog
 
 
 def index(request):
@@ -25,19 +25,20 @@ def resume(request):
     context = {
         'resume': resume,
         'setting': setting,
-        'skills' : skills,
-        'education' : education,
-        'otherskill' : otherskill,
-        'experience' : experience,
+        'skills': skills,
+        'education': education,
+        'otherskill': otherskill,
+        'experience': experience,
     }
     return render(request, 'resume.html', context)
+
 
 def contact(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
         message = request.POST.get('message')
-        body = name + '\n'+ '\n'+ '\n' + message + '\n'+ '\n'+ '\n' + 'From: ' + email
+        body = name + '\n' + '\n' + '\n' + message + '\n' + '\n' + '\n' + 'From: ' + email
 
         form = EmailMessage(
             'پیام از طرف سایت',
@@ -52,3 +53,23 @@ def contact(request):
     }
     return render(request, 'contact.html', context)
 
+
+def blog(request):
+    blog = Blog.objects.order_by('title')
+    setting = Setting.objects.get(pk=1)
+
+    context = {
+        'blog': blog,
+        'setting': setting,
+    }
+    return render(request, 'all_blogs.html', context)
+
+
+def blog_detail(request, id):
+    blog = Blog.objects.get(pk=id)
+    setting = Setting.objects.get(pk=1)
+    context = {
+        'blog': blog,
+        'setting': setting
+    }
+    return render(request, 'blog_detail.html', context)

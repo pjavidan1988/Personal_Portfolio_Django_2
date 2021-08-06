@@ -115,3 +115,19 @@ class Experience(models.Model):
 
     def __str__(self):
         return self.experiences
+
+
+
+class Blog(models.Model):
+    title = models.CharField(max_length=255)
+    img = models.ImageField(blank=True, upload_to='images/blog/%Y/%m/%d/')
+    description = RichTextUploadingField()
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Blog'
+        verbose_name_plural = 'Blog'

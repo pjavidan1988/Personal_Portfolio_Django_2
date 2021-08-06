@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from home.models import Setting, Resume, Skill, Education, otherSkill, Experience
+from home.models import Setting, Resume, Skill, Education, otherSkill, Experience, Blog
 
 
 class SettingAdmin(admin.ModelAdmin):
@@ -37,5 +37,12 @@ class ResumeAdmin(admin.ModelAdmin):
     inlines = [ResumeSkillInline, ResumeEducationInline, ResumeotherSkillInline, ResumeExperienceInline]
 
 
+
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ['title', 'update_at']
+    list_filter = ['update_at']
+
+
 admin.site.register(Setting, SettingAdmin)
 admin.site.register(Resume, ResumeAdmin)
+admin.site.register(Blog, BlogAdmin)

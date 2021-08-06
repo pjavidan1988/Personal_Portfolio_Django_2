@@ -29,6 +29,8 @@ urlpatterns = [
 
     path('resume/', views.resume, name='resume'),
     path('contact/', views.contact, name='contact'),
+    path('blog/', views.blog, name='blog'),
+    path('blog/<int:id>', views.blog_detail, name='blog_detail'),
 
 ]
 

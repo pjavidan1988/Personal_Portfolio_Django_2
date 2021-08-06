@@ -1,7 +1,8 @@
 {% extends 'homebase.html' %}
-{% block title %}  {{ setting.name }}  {{ setting.last_name }}  | تماس با من {% endblock %}
+{% block title %}  {{ setting.name }}  {{ setting.last_name }}  | وبلاگ {% endblock %}
 {% load static %}
 {% block body %}
+{% load jformat %}
     <!-- Preloader -->
     <div class="preloader">
         <div class="preloader__wrap">
@@ -99,45 +100,23 @@
                             <h1 class="title title--h1 title__separate">تماس با من</h1>
                         </div>
 
-                        <!-- Contact -->
-                        <form method="post" action="" class="contact-form">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="form-group col-12 col-md-6">
-                                    <i class="font-icon icon-user"></i>
-                                    <input type="text" class="input input__icon form-control" id="nameContact"
-                                           name="name" placeholder="نام و نام خانوادگی" required="required"
-                                           autocomplete="on"
-                                           oninvalid="setCustomValidity('لطفا نام و نام خانوادگی خود را وارد کنید.')"
-                                           onkeyup="setCustomValidity('')">
-                                    <div class="help-block with-errors"></div>
+                        <!-- News -->
+                        <div class="news-grid pb-0">
+                            {% for rs in blog %}
+                            <!-- Post -->
+                            <article class="news-item box">
+                                <div class="news-item__image-wrap overlay overlay--45">
+                                    <div class="news-item__date">{{ rs.create_at|jformat:"%Y/%m/%d" }}</div>
+                                    <a class="news-item__link" href="/blog/{{ rs.id }}"></a>
+                                    <img class="cover lazyload" src="{{ rs.img.url }}" alt=""/>
                                 </div>
-                                <div class="form-group col-12 col-md-6">
-                                    <i class="font-icon icon-envelope"></i>
-                                    <input type="email" class="input input__icon form-control" id="emailContact"
-                                           name="email" placeholder="آدرس ایمیل" required="required"
-                                           autocomplete="on" oninvalid="setCustomValidity('ایمیل نادرست است.')"
-                                           onkeyup="setCustomValidity('')">
-                                    <div class="help-block with-errors"></div>
+                                <div class="news-item__caption">
+                                    <h2 class="title title--h4">{{ rs.title }}</h2>
+                                    {{ rs.description|striptags|truncatechars:100|safe }}
                                 </div>
-                                <div class="form-group col-12 col-md-12">
-                                <textarea class="textarea form-control" id="messageContact" name="message"
-                                          placeholder="پیام ..." rows="4" required="required"
-                                          oninvalid="setCustomValidity('لطفا پیام خود را وارد کنید.')"
-                                          onkeyup="setCustomValidity('')"></textarea>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-md-6 order-2 order-md-1 text-center text-md-left">
-                                    <div id="validator-contact" class="hidden"></div>
-                                </div>
-                                <div class="col-12 col-md-6 order-1 order-md-2 text-left">
-                                    <button type="submit" class="btn" style="margin-bottom: 40px"><i class="font-icon icon-send"></i> ارسال پیام
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                            </article>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
 

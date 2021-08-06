@@ -1,4 +1,5 @@
 {% extends 'homebase.html' %}
+{% block title %}  {{ setting.name }}  {{ setting.last_name }}  | رزمه {% endblock %}
 {% load static %}
 {% block body %}
 <!-- Preloader -->
@@ -83,8 +84,7 @@
                         <ul class="nav">
                             <li class="nav__item"><a href="/">درباره من</a></li>
                             <li class="nav__item"><a href="/resume">رزومه من</a></li>
-                            <li class="nav__item"><a href="portfolio.html">نمونه کار ها</a></li>
-                            <li class="nav__item"><a href="blog.html">وبلاگ</a></li>
+                            <li class="nav__item"><a href="/blog">وبلاگ</a></li>
                             <li class="nav__item"><a href="/contact">تماس با من</a></li>
                             <li class="nav__item"><a href="/home_en">English</a></li>
                         </ul>

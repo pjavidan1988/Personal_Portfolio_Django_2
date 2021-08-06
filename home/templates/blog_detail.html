@@ -1,6 +1,7 @@
 {% extends 'homebase.html' %}
-{% block title %}  {{ setting.name }}  {{ setting.last_name }}  | تماس با من {% endblock %}
+{% block title %}  {{ setting.name }}  {{ setting.last_name }}  | جزئیات وبلاگ {% endblock %}
 {% load static %}
+{% load jformat %}
 {% block body %}
     <!-- Preloader -->
     <div class="preloader">
@@ -94,50 +95,27 @@
                             </ul>
                         </div>
 
-                        <!-- About -->
-                        <div class="pb-2">
-                            <h1 class="title title--h1 title__separate">تماس با من</h1>
+                    <!-- Post -->
+                    <div class="pb-3">
+                        <header class="header-post">
+                            <div class="header-post__date">{{ blog.create_at|jformat:"%Y/%m/%d" }}</div>
+                            <h1 class="title title--h1">{{ blog.title }}</h1>
+                            <div class="header-post__image-wrap">
+                                <img class="cover lazyload" src="{{ blog.img.url }}" alt=""/>
+                            </div>
+                        </header>
+                        <div class="caption-post">
+                            {{ blog.description | safe }}
                         </div>
-
-                        <!-- Contact -->
-                        <form method="post" action="" class="contact-form">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="form-group col-12 col-md-6">
-                                    <i class="font-icon icon-user"></i>
-                                    <input type="text" class="input input__icon form-control" id="nameContact"
-                                           name="name" placeholder="نام و نام خانوادگی" required="required"
-                                           autocomplete="on"
-                                           oninvalid="setCustomValidity('لطفا نام و نام خانوادگی خود را وارد کنید.')"
-                                           onkeyup="setCustomValidity('')">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                                <div class="form-group col-12 col-md-6">
-                                    <i class="font-icon icon-envelope"></i>
-                                    <input type="email" class="input input__icon form-control" id="emailContact"
-                                           name="email" placeholder="آدرس ایمیل" required="required"
-                                           autocomplete="on" oninvalid="setCustomValidity('ایمیل نادرست است.')"
-                                           onkeyup="setCustomValidity('')">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                                <div class="form-group col-12 col-md-12">
-                                <textarea class="textarea form-control" id="messageContact" name="message"
-                                          placeholder="پیام ..." rows="4" required="required"
-                                          oninvalid="setCustomValidity('لطفا پیام خود را وارد کنید.')"
-                                          onkeyup="setCustomValidity('')"></textarea>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-md-6 order-2 order-md-1 text-center text-md-left">
-                                    <div id="validator-contact" class="hidden"></div>
-                                </div>
-                                <div class="col-12 col-md-6 order-1 order-md-2 text-left">
-                                    <button type="submit" class="btn" style="margin-bottom: 40px"><i class="font-icon icon-send"></i> ارسال پیام
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                        <footer class="footer-post">
+                            <a class="footer-post__share" href="{{ setting.github }}"><i
+                                    class="font-icon icon-github"></i><span>گیت هاب</span></a>
+                            <a class="footer-post__share" href="{{ setting.instagram }}"><i
+                                    class="font-icon icon-instagram"></i><span>اینستاگرام</span></a>
+                            <a class="footer-post__share" href="{{ setting.linkedin }}"><i
+                                    class="font-icon icon-linkedin2"></i><span>لینکدین</span></a>
+                        </footer>
+                    </div>
                     </div>
                 </div>
 
